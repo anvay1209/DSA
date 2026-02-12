@@ -2,16 +2,13 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         vector<pair<int,int>> v;
-        
         for(int i = 0; i < nums.size(); i++) {
             v.push_back({nums[i], i});  // {value, original index}
         }
         
         sort(v.begin(), v.end());
-        
         int left = 0;
         int right = nums.size() - 1;
-        
         while(left < right) {
             int sum = v[left].first + v[right].first;
             
@@ -25,7 +22,6 @@ public:
                 right--;
             }
         }
-        
         return {};
     }
 };
