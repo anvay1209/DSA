@@ -1,4 +1,3 @@
-# round(avg(),2) as average_years 
 SELECT project_id,round((y/x),2) as average_years 
 FROM (
     SELECT 
