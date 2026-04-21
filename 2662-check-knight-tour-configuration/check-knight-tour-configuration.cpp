@@ -1,27 +1,26 @@
 class Solution {
 public:
+    bool isValid(vector<vector<int>>& grid, int r, int c, int n, int expVal){
+     if(r < 0 || c < 0 || r >= n || c >= n || grid[r][c] != expVal){
+        return false ;
+     }
+     if(expVal == n*n - 1){
+        return true ;
+     }
+    int ans1 = isValid(grid,r-2,c+1,n,expVal+1) ;
+    int ans2 = isValid(grid,r-1,c+2,n,expVal+1) ;
+    int ans3 = isValid(grid,r+1,c+2,n,expVal+1) ;
+    int ans4 = isValid(grid,r+2,c+1,n,expVal+1) ;
+    int ans5 = isValid(grid,r+2,c-1,n,expVal+1) ;
+    int ans6 = isValid(grid,r+1,c-2,n,expVal+1) ;
+    int ans7 = isValid(grid,r-1,c-2,n,expVal+1) ;
+    int ans8 = isValid(grid,r-2,c-1,n,expVal+1) ;
+
+    return ans1 || ans2 || ans3 || ans4 || ans5 || ans6 || ans7 || ans8;
+    }
+    
     bool checkValidGrid(vector<vector<int>>& grid) {
-        if(grid[0][0] != 0) return false;
-        vector<pair<int, int>> dirs = {{-2, -1}, {-1, -2}, {-2, +1}, {-1, +2},
-        {+1, +2}, {+2, +1}, {+2, -1}, {+1, -2}};
+        return isValid(grid, 0, 0, grid.size(), 0) ;
 
-        int n = grid.size();
-        int i = 0, j = 0;
-
-        for(int curr = 1; curr < n * n; curr++) {
-            bool found = false;
-            for(auto &dir : dirs){
-                int newi = i + dir.first;
-                int newj = j + dir.second;
-                if(newi >= 0 && newj >= 0 && newi < n && newj < n && grid[newi][newj] == curr) {
-                    i = newi;
-                    j = newj;
-                    found = true;
-                    break;
-                }
-            }
-            if(!found) return false;
-        }
-        return true;
     }
 };
